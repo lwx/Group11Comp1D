@@ -1,0 +1,39 @@
+The chronicles of ALU:
+
+ALU_Project V1.0 issues:
+1. The comparator was implemented by directly using MOJO's logical comparisons.
+
+ case(alufn[2:0]){ //values of alufn that define comparator function
+    b001:
+      cmp = (a==b);
+    b010:
+      cmp = (a<b); // 
+    b011:
+      cmp = (a<=b); // 
+    b110:
+      cmp = (a>b);
+    b111:
+      cmp = (a>=b);
+      
+    default:
+      cmp = b0;
+  }
+
+  However, it has come to our attention that we were required to use Z,V and N. Hence we would have to rewrite the code 
+  for computing Z,V and N as the inputs for  the comparator module.
+  
+  ALU_Project V1.1 issues:
+  We reworked the Z,V and N outputs into the comparator's inputs.
+  All other module's functionalities remain intact.
+  However, there appeared to be issues with the computation of Z, V and N.
+  
+  ALU_Project_Finalized:
+  We thus realized what the problem was:
+  1. The bit assignment to the operation checker was wrong;
+  check alufn[1:0] instead of [2:1]
+  2. We forgot to perform a "forced subtraction on a and b".
+  (Setting alufn[0] to 1), which caused the comparator to fail.
+  
+  
+  
+  
