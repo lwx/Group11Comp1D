@@ -1,6 +1,6 @@
 module boolean ( //performs AND, OR, XOR, "A" LDR functions
 //inputs from ALU
-    input alufn[4],
+    input alufn[6],
     input a[8],  
     input b[8],  
 //output to ALU
@@ -9,22 +9,20 @@ module boolean ( //performs AND, OR, XOR, "A" LDR functions
 var i; //variable index for each bit of boole output
   always {
     for (i=0; i<8; i++){ //for each bit    
-    case(alufn[3:0]){ //input 3 bits
-      b1110:
+    case(alufn[2:0]){ //input 3 bits
+      b000:
         boole[i]=a[i]|b[i]; //OR
-      b0100:
+      b100:
         boole[i] = ~(a[i]|b[i]); //NOR
-      b1000:
+      b001:
         boole[i] = (a[i]&b[i]); //AND
-      b1001:
+      b101:
         boole[i]= ~(a[i]&b[i]); //NAND
-      b0001:
+      b010:
         boole[i] = (a[i]^b[i]); //XOR
-      b0111:
+      b110:
         boole[i] = ~(a[i]^b[i]); //XNOR
-      b1010:
-        boole[i] = a[i];
-        
+      
       default:
       boole[i]=b0; //output
   }
