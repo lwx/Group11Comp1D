@@ -63,7 +63,9 @@ module mojo_top (
     a = io_dip[0]; //right dip switch controls input a
     b = io_dip[1]; //middle dip switch controls input b
     alufn = io_dip[2][5:0]; 
-       
+    led[1] = alu1.v;
+    led[0] = alu1.n;
+    led[2] = alu1.z;
    // assigning inputs and output of alu    
     alu1.alufn = alufn; // alufn input to alu module
     alu1.a = a; //a input to alu module

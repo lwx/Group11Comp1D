@@ -3,9 +3,12 @@ module alu (
     input alufn[6],
     input a[8],  
     input b[8],  
+    
 //outputs to mojo_top
-    output alu[8]
-
+    output alu[8],
+    output z,
+    output v,
+    output n
    
   ) {
   
@@ -19,14 +22,14 @@ module alu (
     //assigning inputs of ALU to adder module
     adder1.a = a;
     adder1.b = b; 
-    adder1.alufn = alufn;
-    
+    adder1.alufn = alufn; 
     
     //assigning inputs of ALU to compare module
     compare1.alufn = alufn;
     compare1.v = adder1.v;
     compare1.n = adder1.n;
     compare1.z = adder1.z;
+    
     
     //assigning inputs of ALU to boolean module
     boolean1.a =a;
@@ -47,10 +50,15 @@ module alu (
       b10:
       alu = shifter1.a1; //selects shifter output
       b11:
-      alu = compare1.cmp; //selects compare output
+      alu = compare1.cmp1; //selects compare output
       default:
       alu = 8b0;
   }
+
+    v = adder1.v; // assigns output v as the v-output of the adder module
+    n = adder1.n;
+    z = adder1.z;
+    
 
 }
 }
